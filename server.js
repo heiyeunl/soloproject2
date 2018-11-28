@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
+
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 
+app.use(bodyParser.urlencoded({extended : false}));
+app.use(bodyParser.json());
 
 
 // Connect to db
