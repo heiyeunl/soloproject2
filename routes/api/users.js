@@ -13,7 +13,7 @@ router.get('/test', (req, res) => res.json({msg: "works"}));
 // @access Public
 
 router.post('/register', (req, res) => {
-  User.findOne({ username: req.body.username })
+  User.findOne({ email: req.body.email })
 	.then(doc => {
 	  if (doc) return res.status(400).send('Username has already been registered');
 	 else {
@@ -31,6 +31,18 @@ router.post('/register', (req, res) => {
 	})
   }
 })
+})
+
+// @route GET api/users/login
+// @desc Login User
+// @access Public
+router.post('/login', (req, res) => {
+  User.findOne({ email: req.body.email})
+    .then(doc => {
+	  if (!doc) return res.status(404).send("Incorrect username or password");
+	  else if (doc.password === req.body.password) res.send(doc)
+	  else res.status(404).send("Incorrect username or Password");
+    })
 })
 
 module.exports = router ;

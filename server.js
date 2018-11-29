@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
+const session = require('./routes/api/session');
+
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
@@ -27,6 +29,8 @@ app.get('/', (req, res) => res.send('Hello World'));
 
 app.use('/api/users', users);
 app.use('/api/profile', profile);
+app.use('/api/session', session);
+
 
 
 
